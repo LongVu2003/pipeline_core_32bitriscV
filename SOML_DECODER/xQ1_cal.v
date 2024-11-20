@@ -1,4 +1,4 @@
-module xI1_cal (
+module xQ1_cal (
 	input clk,
 	input rst,
 	input start,
@@ -7,7 +7,7 @@ module xI1_cal (
 	input [63:0] col0_i,
 	input [63:0] col1_r,
 	input [63:0] col1_i,
-	output [15:0] xI1
+	output [15:0] xQ1
 );
 
 wire [15:0] out_r;
@@ -15,7 +15,7 @@ wire [15:0] trace_result;
 wire done_trace;
 wire [63:0] tmp_col0_r,tmp_col0_i,tmp_col1_r,tmp_col1_i;
 // instance YxGA1
-YGA1_cal Yga1cal0 (
+YGB1_cal Ygb1cal0 (
 	.clk(clk),
 	.rst(rst),
 	.start(start),
@@ -37,13 +37,6 @@ trace_cal trace0(
 
 wire odivo;
 
-reg div_clk2;
-always @(posedge clk) begin
-	if(rst) div_clk2 <= 0;
-	else
-		div_clk2 <= !div_clk2;
-end
-
 fxp_div_pipe # (
     .WIIA     ( 8     ),
     .WIFA     ( 8     ),
@@ -54,10 +47,10 @@ fxp_div_pipe # (
     .ROUND    ( 1        )
 ) fxp_div_pipe_i (
     .rstn     ( ~rst     ),
-    .clk      ( div_clk2      ),
+    .clk      ( clk      ),
     .dividend ( trace_result),
     .divisor  ( 16'h0200  ),
-    .out      ( xI1     ),
+    .out      ( xQ1     ),
     .overflow ( odivo    )
 );
 

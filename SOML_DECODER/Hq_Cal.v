@@ -1,6 +1,7 @@
 module Hq_Cal(
 	input clk,
 	input rst,
+	input start,
 	output [15:0] Hq_r,
 	output [15:0] Hq_i
 	//output [15:0] ready
@@ -51,6 +52,7 @@ end
 AddressGenerator AddrGen0(
 	.clk(clk),
 	.rst(rst),
+	.ena(start),
 	.addr_colS(addr_colS),
 	.addr_Si(addr_Si),
 	.addr_rowH(addr_rowH)

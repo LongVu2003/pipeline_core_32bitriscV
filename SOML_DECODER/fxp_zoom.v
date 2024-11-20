@@ -1,11 +1,3 @@
-//--------------------------------------------------------------------------------------------------------
-// Module  : fxp_zoom
-// Type    : synthesizable
-// Standard: Verilog 2001 (IEEE1364-2001)
-// Function: bit width conversion for fixed-point
-//           combinational logic
-//--------------------------------------------------------------------------------------------------------
-
 module fxp_zoom #(
     parameter WII  = 8,
     parameter WIF  = 8,

@@ -1,11 +1,3 @@
-//--------------------------------------------------------------------------------------------------------
-// Module  : fxp_div_pipe
-// Type    : synthesizable
-// Standard: Verilog 2001 (IEEE1364-2001)
-// Function: division
-//           pipeline stage = WOI+WOF+3
-//--------------------------------------------------------------------------------------------------------
-
 module fxp_div_pipe #(
     parameter WIIA = 8,
     parameter WIFA = 8,
@@ -40,7 +32,7 @@ localparam  [WOI+WOF-1:0] ONEO = 1;
 
 integer ii;
 
-// initialize all regs
+// initialize all regs (khoi tao cac reg banwgf 0)
 initial for(ii=0; ii<=WOI+WOF; ii=ii+1) begin
             res  [ii] = 0;
             divrp[ii] = 0;
@@ -52,10 +44,33 @@ initial for(ii=0; ii<=WOI+WOF; ii=ii+1) begin
 wire [WIIA+WIFA-1:0] ONEA = 1;
 wire [WIIB+WIFB-1:0] ONEB = 1;
 
-// convert dividend and divisor to positive number
+// convert dividend and divisor to positive number (chuyen 2 gias trij veef gias trij duongw)
 wire [WIIA+WIFA-1:0] udividend = dividend[WIIA+WIFA-1] ? (~dividend)+ONEA : dividend;
 wire [WIIB+WIFB-1:0]  udivisor =  divisor[WIIB+WIFB-1] ? (~ divisor)+ONEB : divisor ;
 
+fxp_zoom # (
+    .WII      ( WIIA      ),
+    .WIF      ( WIFA      ),
+    .WOI      ( WRI       ),
+    .WOF      ( WRF       ),
+    .ROUND    ( 0         )
+) dividend_zoom (
+    .in       ( udividend ),
+    .out      ( divd      ),
+    .overflow (           )
+);
+
+fxp_zoom # (
+    .WII      ( WIIB      ),
+    .WIF      ( WIFB      ),
+    .WOI      ( WRI       ),
+    .WOF      ( WRF       ),
+    .ROUND    ( 0         )
+)  divisor_zoom (
+    .in       ( udivisor  ),
+    .out      ( divr      ),
+    .overflow (           )
+);
 
 // 1st pipeline stage: convert dividend and divisor to positive number
 always @ (posedge clk or negedge rstn)
@@ -68,8 +83,8 @@ always @ (posedge clk or negedge rstn)
     end else begin
         res[0]   <= 0;
         acc[0]   <= 0;
-        divdp[0] <= dividend;
-        divrp[0] <= divisor;
+        divdp[0] <= divd;
+        divrp[0] <= divr;
         sign [0] <= dividend[WIIA+WIFA-1] ^ divisor[WIIB+WIFB-1];
     end
 
@@ -143,4 +158,4 @@ always @ (posedge clk or negedge rstn)
         end
     end
 
-endmodule
+endmodule 

@@ -27,12 +27,12 @@ assign col1_i = (finish)? shift_reg_col1_i:col1_i;
 always @(posedge clk) begin
 	if(rst) rx_en <= 1'b0;
 	else if (start) rx_en <= 1'b1;
-	else if (counter == 3'd7) rx_en <= 1'b0;
+	//else if (counter == 3'd7) rx_en <= 1'b0;
 end
 // counter
 always @(posedge clk) begin
 	if(rst) counter <= 0;
-	else if(start) counter <= 0;
+	//else if(start) counter <= 0;
 	else if(rx_en) counter <= counter + 1;
 end
 //finish

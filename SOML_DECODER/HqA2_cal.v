@@ -1,6 +1,15 @@
 module HqA2_cal(
 	input clk,
 	input rst,
+	input start,
+	input [31:0] in_Hqr0,
+        input [31:0] in_Hqr1,
+        input [31:0] in_Hqr2,
+        input [31:0] in_Hqr3,
+        input [31:0] in_Hqi0,
+        input [31:0] in_Hqi1,
+        input [31:0] in_Hqi2,
+        input [31:0] in_Hqi3,
 	output [63:0] outcol0_r,
 	output [63:0] outcol0_i,
 	output [63:0] outcol1_r,
@@ -14,6 +23,7 @@ wire [1:0] addr_rowH;
 AddressGenerator AddrGen0(
 	.clk(clk),
 	.rst(rst),
+	.ena(start),
 	.addr_colS(addr_colA2),
 	.addr_rowH(addr_rowH)
 );
@@ -27,39 +37,25 @@ wire [31:0] tableHI_ [3:0];
 wire [31:0] tableA2_r [1:0];
 wire [31:0] tableA2_i [1:0];
 
-assign tableHR_[0] = 32'hffdd0183;
-assign tableHR_[1] = 32'hffba00b7;
-assign tableHR_[2] = 32'hff9c0005;
-assign tableHR_[3] = 32'h00dbffad;
+assign tableHR_[0] = in_Hqr0;//32'hffdd0183;
+assign tableHR_[1] = in_Hqr1;//32'hffba00b7;
+assign tableHR_[2] = in_Hqr2;//32'hff9c0005;
+assign tableHR_[3] = in_Hqr3;//32'h00dbffad;
 
-assign tableHI_[0] = 32'h00c1fff4;
-assign tableHI_[1] = 32'hff4a003f;
-assign tableHI_[2] = 32'hff2afea3;
-assign tableHI_[3] = 32'h000cffea;
+assign tableHI_[0] = in_Hqr0;//32'h00c1fff4;
+assign tableHI_[1] = in_Hqr1;//32'hff4a003f;
+assign tableHI_[2] = in_Hqr2;//32'hff2afea3;
+assign tableHI_[3] = in_Hqr3;//32'h000cffea;
 
-//------------A2----------------
-assign tableA2_r[0] = 32'h00000100;
-assign tableA2_r[1] = 32'hff000000;
+ //------------A2----------------
 
-assign tableA2_i[0] = 32'h00000000;
-assign tableA2_i[1] = 32'h00000000;
-/*
+assign tableA2_r[0] = (start)?32'h00000100:tableA2_r[0];
+assign tableA2_r[1] = (start)?32'hff000000:tableA2_r[1];
 
-//------------B1----------------
-assign tableB1_r[0] = 32'h01000000;
-assign tableB1_r[1] = 32'h0000ff00;
-
-assign tableB1_i[0] = 32'h00000000;
-assign tableB1_i[1] = 32'h00000000;
+assign tableA2_i[0] = (start)?32'h00000000:tableA2_i[0];
+assign tableA2_i[1] = (start)?32'h00000000:tableA2_i[1];
 
 
-//------------B2----------------
-assign tableB2_r[0] = 32'h00000100;
-assign tableB2_r[1] = 32'h01000000;
-
-assign tableB2_i[0] = 32'h00000000;
-assign tableB2_i[1] = 32'h00000000;
-*/
 assign rowH_r = tableHR_[addr_rowH];// {-0.1367    1.5117    0.3008    1.0313}
 assign rowH_i = tableHI_[addr_rowH];// { 0.7539   -0.0469    0.2344   -1.1563}
 /*
@@ -113,31 +109,47 @@ vadd #(8,16) add4(
 	.c(out_i)
 );
 assign start_cal = (counter == 5) ? 1:0;
+reg tx_en;
+always @(posedge clk) begin
+        if(rst) tx_en <= 1'b0;
+        else if(start) tx_en <= 1'b1;
+end
+
 // counter
-reg [2:0] counter;
 reg done;
+reg [2:0] counter;
 always @(posedge clk) begin
         if(rst) begin
                 counter <= 0;
                 done <= 0;
         end
-        else if(!done) begin
-                if(counter < 5) begin
-                        counter <= counter + 1;
-                end
-                else begin
-                        counter <= 0;
-                        done <= 1;
+        else if(start) counter <= 0;
+        else if(tx_en) begin
+                if(!done) begin
+                        if(counter < 5) begin
+                                counter <= counter + 1;
+                        end
+                        else begin
+                                counter <= 0;
+                                done <= 1;
+                        end
                 end
         end
 end
-
+reg reg_start_cal;
+always @(posedge clk) begin
+        if(rst) begin
+                reg_start_cal <= 1'b0;
+        end else begin
+                reg_start_cal <= start_cal;
+        end
+end
 genColout gencol0(
 	.clk(clk),
 	.rst(rst),
 	.sdr(out_r),
 	.sdi(out_i),
-	.start(start_cal),
+	.start(start_cal | ready),
 	.col0_r(outcol0_r),
 	.col0_i(outcol0_i),
 	.col1_r(outcol1_r),

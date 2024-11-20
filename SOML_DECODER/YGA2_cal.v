@@ -1,4 +1,4 @@
-module YGA1_cal(
+module YGA2_cal(
 	input clk,
 	input rst,
 	input start,

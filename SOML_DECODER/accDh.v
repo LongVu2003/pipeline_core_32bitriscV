@@ -1,4 +1,4 @@
-module sipo(
+module accDh(
 	input clk,
 	input rst,
 	input start,
@@ -17,7 +17,7 @@ assign out = (finish)? shift_reg:out;
 always @(posedge clk) begin
 	if(rst) rx_en <= 1'b0;
 	else if (start) rx_en <= 1'b1;
-	else if (counter == 4'd7) rx_en <= 1'b0;
+	else if (counter == 4'd6) rx_en <= 1'b0;
 end
 // counter
 always @(posedge clk) begin
@@ -28,7 +28,7 @@ end
 //finish
 always @(posedge clk) begin
 	if(rst) finish <= 1'b0;
-	else if(counter == 4'd7)finish <= 1'b1;
+	else if(counter == 4'd6)finish <= 1'b1;
 	else finish <= 1'b0;
 end
 // receive and shift data

@@ -10,7 +10,7 @@ module trace_cal(
 reg rx_en;
 reg [1:0] counter;
 reg [15:0] shift_reg;
-reg start,enc_d,enc_dd,enc_ddd,enc_dddd;
+reg start,enc_d,enc_dd,enc_ddd,enc_dddd,enc_ddddd;
 
 always @(posedge clk) begin
 	if(rst) enc_d <= 0;
@@ -19,7 +19,8 @@ always @(posedge clk) begin
 		enc_dd  <= enc_d;
 		enc_ddd <= enc_dd;
 		enc_dddd <= enc_ddd;
-		start    <= enc_dddd;
+		enc_ddddd <= enc_dddd;
+		start    <= enc_ddddd;
 	end
 end
 	
@@ -56,12 +57,12 @@ assign out = (finish)? shift_reg:out;
 always @(posedge clk) begin
 	if(rst) rx_en <= 1'b0;
 	else if (start) rx_en <= 1'b1;
-	else if (counter == 2'd3) rx_en <= 1'b0;
+	//else if (counter == 2'd3) rx_en <= 1'b0;
 end
 // counter
 always @(posedge clk) begin
 	if(rst) counter <= 0;
-	else if(start) counter <= 0;
+	//else if(start) counter <= 0;
 	else if(rx_en) counter <= counter + 1;
 end
 //finish
@@ -73,7 +74,7 @@ end
 // receive and shift data
 always @(posedge clk) begin
 	if(rst) shift_reg <= 15'd0;
-	else if(start) shift_reg[15:0] <= 0;
+	else if(finish) shift_reg[15:0] <= sdi;
 	else if (rx_en) begin
 		if(counter  == 0 || counter == 3)
 			shift_reg [15:0] <= shift_reg + sdi;
