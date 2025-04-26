@@ -1,0 +1,14 @@
+Subprocess had a non-zero exit.
+Last 10 line(s):
+Generating RTLIL representation for module `\ALU'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /home/vu/RISCV_Pipeline_Core/src/ALU_Decoder.v
+Parsing SystemVerilog input from `/home/vu/RISCV_Pipeline_Core/src/ALU_Decoder.v' to AST representation.
+Generating RTLIL representation for module `\ALU_Decoder'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /home/vu/RISCV_Pipeline_Core/src/Control_Unit_Top.v
+ALU_Decoder.v:15: ERROR: Re-definition of module `\ALU_Decoder'!
+
+Full log file: 'runs/RUN_2025-04-26_12-11-00/05-yosys-jsonheader/yosys-jsonheader.log'

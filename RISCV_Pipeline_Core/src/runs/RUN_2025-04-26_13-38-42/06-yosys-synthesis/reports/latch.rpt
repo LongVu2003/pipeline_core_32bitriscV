@@ -1,0 +1,4 @@
+
+14. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\Data_Memory.$memwr$\mem$Data_Memory.v:32$142_EN' from process `\Data_Memory.$proc$Data_Memory.v:0$154'.
+No latch inferred for signal `\Register_File.$memwr$\Register$Register_File.v:34$87_EN' from process `\Register_File.$proc$Register_File.v:0$104'.

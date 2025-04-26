@@ -1,0 +1,100 @@
+$date
+	Sat Apr 26 15:49:49 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module writeback_cycle_tb $end
+$var wire 32 ! ResultW [31:0] $end
+$var reg 32 " ALU_ResultW [31:0] $end
+$var reg 32 # PCPlus4W [31:0] $end
+$var reg 32 $ ReadDataW [31:0] $end
+$var reg 1 % ResultSrcW $end
+$var reg 1 & clk $end
+$var reg 1 ' rst $end
+$scope module dut $end
+$var wire 32 ( ALU_ResultW [31:0] $end
+$var wire 32 ) PCPlus4W [31:0] $end
+$var wire 32 * ReadDataW [31:0] $end
+$var wire 1 % ResultSrcW $end
+$var wire 1 & clk $end
+$var wire 1 ' rst $end
+$var wire 32 + ResultW [31:0] $end
+$scope module result_mux $end
+$var wire 32 , a [31:0] $end
+$var wire 32 - b [31:0] $end
+$var wire 1 % s $end
+$var wire 32 . c [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx .
+bx -
+bx ,
+bx +
+bx *
+bx )
+bx (
+0'
+0&
+x%
+bx $
+bx #
+bx "
+bx !
+$end
+#5
+1&
+#10
+0&
+#15
+b10101010101010101010101010101010 !
+b10101010101010101010101010101010 +
+b10101010101010101010101010101010 .
+1&
+b10111011101110111011101110111011 $
+b10111011101110111011101110111011 *
+b10111011101110111011101110111011 -
+b10101010101010101010101010101010 "
+b10101010101010101010101010101010 (
+b10101010101010101010101010101010 ,
+b1000000000100 #
+b1000000000100 )
+0%
+1'
+#20
+0&
+#25
+1&
+#26
+b11011101110111011101110111011101 !
+b11011101110111011101110111011101 +
+b11011101110111011101110111011101 .
+b11011101110111011101110111011101 $
+b11011101110111011101110111011101 *
+b11011101110111011101110111011101 -
+b11001100110011001100110011001100 "
+b11001100110011001100110011001100 (
+b11001100110011001100110011001100 ,
+b10000000001000 #
+b10000000001000 )
+1%
+#30
+0&
+#35
+1&
+#40
+0&
+#45
+1&
+#50
+0&
+#55
+1&
+#57

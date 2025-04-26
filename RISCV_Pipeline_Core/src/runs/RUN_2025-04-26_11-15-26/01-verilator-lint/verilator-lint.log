@@ -1,0 +1,99 @@
+%Warning-PINCONNECTEMPTY: Execute_Cycle.v:74:14: Cell pin connected by name with empty reference: 'OverFlow'
+   74 |             .OverFlow(),
+      |              ^~~~~~~~
+                          /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:18:1: ... note: In file included from 'Pipeline_Top.v'
+                          ... For warning description see https://verilator.org/warn/PINCONNECTEMPTY?v=5.018
+                          ... Use "/* verilator lint_off PINCONNECTEMPTY */" and lint_on around source to disable this message.
+%Warning-PINCONNECTEMPTY: Execute_Cycle.v:75:14: Cell pin connected by name with empty reference: 'Carry'
+   75 |             .Carry(),
+      |              ^~~~~
+                          /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:18:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-PINCONNECTEMPTY: Execute_Cycle.v:77:14: Cell pin connected by name with empty reference: 'Negative'
+   77 |             .Negative()
+      |              ^~~~~~~~
+                          /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:18:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:27:51: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'Sum' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   27 |     assign {Cout,Result} = (ALUControl == 3'b000) ? Sum :
+      |                                                   ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:28:51: Operator COND expects 33 bits on the Conditional True, but Conditional True's VARREF 'Sum' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   28 |                            (ALUControl == 3'b001) ? Sum :
+      |                                                   ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:29:55: Operator AND expects 33 bits on the LHS, but LHS's VARREF 'A' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   29 |                            (ALUControl == 3'b010) ? A & B :
+      |                                                       ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:29:55: Operator AND expects 33 bits on the RHS, but RHS's VARREF 'B' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   29 |                            (ALUControl == 3'b010) ? A & B :
+      |                                                       ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:30:55: Operator OR expects 33 bits on the LHS, but LHS's VARREF 'A' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   30 |                            (ALUControl == 3'b011) ? A | B :
+      |                                                       ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHEXPAND: ALU.v:30:55: Operator OR expects 33 bits on the RHS, but RHS's VARREF 'B' generates 32 bits.
+                                 : ... note: In instance 'Pipeline_top.Execute.alu'
+   30 |                            (ALUControl == 3'b011) ? A | B :
+      |                                                       ^
+                      /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:28:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-WIDTHTRUNC: Instruction_Memory.v:23:47: Bit extraction of array[1023:0] requires 10 bit index, not 30 bits.
+                                               : ... note: In instance 'Pipeline_top.Fetch.IMEM'
+   23 |   assign RD = (rst == 1'b0) ? {32{1'b0}} : mem[A[31:2]];
+      |                                               ^
+                     /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:24:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Writeback_Cycle.v:18:7: Signal is not used: 'clk'
+                                             : ... note: In instance 'Pipeline_top.WriteBack'
+   18 | input clk, rst, ResultSrcW;
+      |       ^~~
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:20:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Writeback_Cycle.v:18:12: Signal is not used: 'rst'
+                                              : ... note: In instance 'Pipeline_top.WriteBack'
+   18 | input clk, rst, ResultSrcW;
+      |            ^~~
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:20:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Writeback_Cycle.v:19:14: Signal is not used: 'PCPlus4W'
+                                              : ... note: In instance 'Pipeline_top.WriteBack'
+   19 | input [31:0] PCPlus4W, ALU_ResultW, ReadDataW;
+      |              ^~~~~~~~
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:20:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Instruction_Memory.v:18:15: Bits of signal are not used: 'A'[1:0]
+                                                 : ... note: In instance 'Pipeline_top.Fetch.IMEM'
+   18 |   input [31:0]A;
+      |               ^
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:24:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Sign_Extend.v:16:18: Bits of signal are not used: 'In'[19:12,6:0]
+                                          : ... note: In instance 'Pipeline_top.Decode.extension'
+   16 |     input [31:0] In;
+      |                  ^~
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:27:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: Data_Memory.v:18:17: Bits of signal are not used: 'A'[31:10]
+                                          : ... note: In instance 'Pipeline_top.Memory.dmem'
+   18 |     input [31:0]A,WD;
+      |                 ^
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:29:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: ALU_Decoder.v:19:16: Bits of signal are not used: 'funct7'[6,4:0]
+                                          : ... note: In instance 'Pipeline_top.Decode.control.ALU_Decoder'
+   19 |     input [6:0]funct7,op;
+      |                ^~~~~~
+                       Control_Unit_Top.v:16:1: ... note: In file included from 'Control_Unit_Top.v'
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:25:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-UNUSEDSIGNAL: ALU_Decoder.v:19:23: Bits of signal are not used: 'op'[6,4:0]
+                                          : ... note: In instance 'Pipeline_top.Decode.control.ALU_Decoder'
+   19 |     input [6:0]funct7,op;
+      |                       ^~
+                       Control_Unit_Top.v:16:1: ... note: In file included from 'Control_Unit_Top.v'
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:25:1: ... note: In file included from 'Pipeline_Top.v'
+%Warning-SYNCASYNCNET: /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:35:16: Signal flopped as both synchronous and async: 'rst'
+                       Fetch_Cycle.v:65:12: ... Location of async usage
+   65 |         if(rst == 1'b0) begin
+      |            ^~~
+                       /home/vu/RISCV_Pipeline_Core/src/Pipeline_Top.v:16:1: ... note: In file included from 'Pipeline_Top.v'
+                       PC_Module.v:23:12: ... Location of sync usage
+   23 |         if(rst == 1'b0)
+      |            ^~~
