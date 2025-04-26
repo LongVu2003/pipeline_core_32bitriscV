@@ -1,4 +1,0 @@
-
-31. Executing PROC_DLATCH pass (convert process syncs to latches).
-No latch inferred for signal `\Register_File.$memwr$\Register$/home/vu/RISCV_Pipeline_Core/src/Register_File.v:34$161_EN' from process `\Register_File.$proc$/home/vu/RISCV_Pipeline_Core/src/Register_File.v:0$178'.
-No latch inferred for signal `\Data_Memory.$memwr$\mem$/home/vu/RISCV_Pipeline_Core/src/Data_Memory.v:32$61_EN' from process `\Data_Memory.$proc$/home/vu/RISCV_Pipeline_Core/src/Data_Memory.v:0$73'.

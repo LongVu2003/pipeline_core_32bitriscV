@@ -1,1 +1,0 @@
-openroad -exit -no_splash -metrics /home/vu/RISCV_Pipeline_Core/src/runs/RUN_2025-04-26_12-48-52/37-openroad-globalrouting/or_metrics_out.json /nix/store/m4202q1n7la2bph83v3h11q6mfrcazx4-python3-3.11.9-env/lib/python3.11/site-packages/openlane/scripts/openroad/grt.tcl
